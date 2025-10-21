@@ -32,32 +32,24 @@ static std::string obtener_ip_salida() {
 }
 
 int main(int argc, char** argv) {
-    if (MPI_Init(&argc, &argv) != MPI_SUCCESS) {
-        std::cerr << "Error iniciando MPI\n";
-        return 1;
-    }
+    MPI_Init(&argc, &argv);
 
-    int rank = 0, size = 1;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);   // ID del proceso
-    MPI_Comm_size(MPI_COMM_WORLD, &size);   // Total de procesos
+    int rank, size;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank); //
+    MPI_Comm_size(MPI_COMM_WORLD, &size); //
 
     char name[MPI_MAX_PROCESSOR_NAME];
-    int name_len = 0;
-    MPI_Get_processor_name(name, &name_len); // Nombre de la máquina
+    int len;
+    MPI_Get_processor_name(name, &len); //
 
     std::string ip = obtener_ip_salida();
 
-    std::cout << "Hola Mundo! soy el proceso " << rank
-              << " de " << size
-              << " corriendo en la maquina " << name
-              << " IP=" << ip
-              << std::endl;
+    std::cout << "Hola, soy el proceso " << rank
+            << " de " << size
+            << " en " << name
+            << " IP=" << ip << std::endl;
 
-    if (MPI_Finalize() != MPI_SUCCESS) {
-        std::cerr << "Error finalizando MPI\n";
-        return 1;
-    }
-    return 0;
+    MPI_Finalize();
 }
 
 // mpicxx -O3 -o ej0.out ej0.cpp
