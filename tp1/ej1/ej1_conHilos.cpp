@@ -34,6 +34,7 @@ long double ln_series_parallel(long double x, long long terms, int nthreads) {
     vector<Params> P(nthreads);
     vector<thread> th(nthreads);
 
+    // Dividimos los datos
     long long base = terms / nthreads;
     long long rem  = terms % nthreads;
     long long cur  = 0;
@@ -44,9 +45,11 @@ long double ln_series_parallel(long double x, long long terms, int nthreads) {
         cur += take;
     }
 
+    // Asignamos y ejecutamos cada hilo con los datos que van a trabajar
     for (int i = 0; i < nthreads; ++i)
         th[i] = thread(worker, &P[i]);
 
+    // Verificamos que termine la ejecucion de cada uno
     long double sum = 0.0L;
     for (int i = 0; i < nthreads; ++i) {
         if (th[i].joinable()) th[i].join();

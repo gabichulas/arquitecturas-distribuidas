@@ -18,17 +18,15 @@ static long double parcial_ln_segmento(long double y, long double y2,
 }
 
 int main(int argc, char** argv) {
-    MPI_Init(&argc, &argv);  // obligatorio en MPI :contentReference[oaicite:2]{index=2}
+    MPI_Init(&argc, &argv);  // 
 
     int rank = 0, size = 1;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    // Parámetros del problema (el TP fija 10 millones de términos) :contentReference[oaicite:3]{index=3}
-    long double x = 1500000.0L;
-    long long terms = 10000000LL; // diez millones (fijo del enunciado)
+    long double x = 1500000.0L; 
+    long long terms = 10000000LL;
     if (rank == 0) {
-        // Opcional: permitir x por stdin para testear (como en tu versión)
         cerr << "Ingrese x (>=1500000) [Enter para usar 1500000]: ";
         long double x_in;
         if (cin >> x_in) x = x_in;
@@ -47,7 +45,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // Preparar constantes de la serie (mismo que en tu función)
+    // Preparar constantes de la serie
     long double y  = (x - 1.0L) / (x + 1.0L);
     long double y2 = y * y;
 
@@ -58,7 +56,7 @@ int main(int argc, char** argv) {
     long long take    = base + (rank < rem ? 1 : 0);
     long long k_end   = k_begin + take;
 
-    // Sincronizar y medir tiempo "de pared" con gettimeofday (como pide el TP) :contentReference[oaicite:7]{index=7}
+    // Sincronizar
     MPI_Barrier(MPI_COMM_WORLD);
     timeval t1{}, t2{};
     if (rank == 0) gettimeofday(&t1, nullptr);

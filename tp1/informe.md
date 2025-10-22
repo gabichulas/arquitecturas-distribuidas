@@ -61,26 +61,51 @@ Se utilizó una PC portatil con las siguientes características:
 **Resultados parciales obtenidos (ejemplo inventado):**
 
 ```
-Patrón 0 → 14 apariciones
-Patrón 1 → 3 apariciones
-Patrón 9 → 3622 apariciones
-Patrón 13 → 6 apariciones
-Patrón 27 → 6 apariciones
+El patrón '0' aparece 14 veces
+El patrón '1' aparece 3 veces
+El patrón '2' aparece 0 veces
+El patrón '3' aparece 0 veces
+El patrón '4' aparece 0 veces
+El patrón '5' aparece 0 veces
+El patrón '6' aparece 4 veces
+El patrón '7' aparece 0 veces
+El patrón '8' aparece 0 veces
+El patrón '9' aparece 3622 veces
+El patrón '10' aparece 0 veces
+El patrón '11' aparece 2 veces
+El patrón '12' aparece 0 veces
+El patrón '13' aparece 6 veces
+El patrón '14' aparece 0 veces
+El patrón '15' aparece 0 veces
+El patrón '16' aparece 2 veces
+El patrón '17' aparece 0 veces
+El patrón '18' aparece 6 veces
+El patrón '19' aparece 0 veces
+El patrón '20' aparece 0 veces
+El patrón '21' aparece 2 veces
+El patrón '22' aparece 0 veces
+El patrón '23' aparece 0 veces
+El patrón '24' aparece 0 veces
+El patrón '25' aparece 0 veces
+El patrón '26' aparece 0 veces
+El patrón '27' aparece 6 veces
+El patrón '28' aparece 0 veces
+El patrón '29' aparece 0 veces
+El patrón '30' aparece 0 veces
+El patrón '31' aparece 0 veces
 ```
 
 **Medición de tiempos:**
 
 | Implementación      | Tiempo (s) | Speedup |
 | ------------------- | ---------- | ------- |
-| Secuencial          | 25.30      | 1.0x    |
-| Paralelo (32 hilos) | 2.90       | 8.72x   |
+| Secuencial          | 4.30556    | 1.0x    |
+| Paralelo (12 hilos) | 0.971355   | 4.43x   |
+| Paralelo (32 hilos) | 0.887331   | 4.85x   |
 
 **Observaciones:**
 
-* El problema se presta muy bien al paralelismo ya que cada hilo trabaja de manera independiente.
-* Se alcanzó un speedup alto, cercano al número de núcleos disponibles.
-
----
+* Se logra mejor speed up al crear la misma cantidad de numeros de hilos con la cantidad de patrones, esto puede deberse a que cada patron tiene una dificultad diferente y se logre un balanceo mejor entre las cpus. 
 
 ## 5. Ejercicio Nº3 – Multiplicación y sumatoria de matrices
 
@@ -147,8 +172,4 @@ Patrón 27 → 6 apariciones
 
 ---
 
-
-
-
-
-# Realizar ej 2 y 4
+# Realizar 4

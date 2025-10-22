@@ -12,12 +12,10 @@ int main() {
         return 1;
     }
 
-    map<string, int> patrones;
-    vector<string> orden;
+    vector<string> patrones;
     string patron;
     while (getline(patronesFile, patron)) {
-        patrones[patron] = 0;
-        orden.push_back(patron);
+        patrones.push_back(patron);
     }
     patronesFile.close();
 
@@ -31,25 +29,27 @@ int main() {
     getline(textoFile, texto); // el archivo tiene una sola línea
     textoFile.close();
 
+    vector<int> contadores(patrones.size(), 0); // inicializamos contadores
+
     timeval inicio, fin;
     gettimeofday(&inicio, NULL);
 
-    for (auto &p : patrones) {
+    // Buscamos cada clave del diccionario en el texto
+    for (int i = 0; i < patrones.size(); i++) {
         int pos = 0;
         while (true) {
-            pos = texto.find(p.first, pos);
+            pos = texto.find(patrones[i], pos);
             if (pos == string::npos) break;
-            p.second++;
-            pos++; // permitir solapamiento
+            contadores[i]++;  // Incrementa el contador para el patrón i
+            pos++;  // Permitir solapamiento
         }
     }
 
     gettimeofday(&fin, NULL);
 
-    // Imprimir según el orden original
-    for (size_t i = 0; i < orden.size(); ++i) {
-        const string &pat = orden[i];
-        cout << "el patron " << i << " aparece " << patrones[pat] << " veces\n";
+    // Mostrar resultados
+    for (int i = 0; i < patrones.size(); i++) {
+        cout << "El patrón '" << i << "' aparece " << contadores[i] << " veces" << endl;
     }
 
     double tiempo = (fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec) / 1000000.0;
